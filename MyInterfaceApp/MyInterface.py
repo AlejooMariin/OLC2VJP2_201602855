@@ -11,6 +11,8 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import mean_squared_error, r2_score
 import re
+import graphviz as gra
+import sklearn as arbol
 
 import requests, os
 mpl.use("agg")
@@ -295,8 +297,10 @@ try:
          valInit= list(map(float,arraylist))
         
          clf = DecisionTreeClassifier().fit(x,y)
-         plot_tree(clf,filled=True)
-         st.pyplot(plt)
+         # plot_tree(clf,filled=True)
+         # st.pyplot(plt)
+         dot= arbol.export_graphviz(clf,out_file=None)
+         st.graphviz_chart(dot)
         # Adaptación de datos
          
          st.write("Prediccion: ")
