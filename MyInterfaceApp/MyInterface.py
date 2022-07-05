@@ -296,7 +296,7 @@ try:
         
          clf = DecisionTreeClassifier().fit(x,y)
          plot_tree(clf,filled=True)
-         st.pyplot(plt)
+         #st.pyplot(plt)
         # Adaptación de datos
          
          st.write("Prediccion: ")
@@ -412,14 +412,23 @@ except Exception as e:
 
 
 # -- Notes on whitening
-with st.expander("Informacion Desarrollador"):
-    st.markdown("""
- * José Alejandro Grande Marín 
- * 201602855
-""")
 with st.expander("Sobre la aplicación"):
     st.markdown("""
  * Brindar una aplicación web que tenga capacidad ejecutar algoritmos de Machine Learning
+      * Regresión lineal.
+      * Regresión polinomial. 
+      * Clasificador Gaussiano.
+      * Clasificador de árboles de decisión. 
+      * Redes neuronales.
+
+ * [Ver Codigo](https://github.com/AlejooMariin/OLC2VJP2_201602855.git)
+""")
+with st.expander("Informacion Desarrollador"):
+    st.markdown("""
+    Universidad de San Carlos de Guatemala\n
+    Ingenieria en Ciencias y Sistemas 
+ * José Alejandro Grande Marín 
+ * 201602855
 """)
 
 
