@@ -19,7 +19,7 @@ from matplotlib.backends.backend_agg import RendererAgg
 _lock = RendererAgg.lock
 
 # -- Set page config
-apptitle = 'Proyecto 2'
+apptitle = 'OLC2 Proyecto 2'
 st.set_page_config(page_title=apptitle, page_icon=":chart_with_upwards_trend:")
 
 # -- Default detector list
@@ -83,6 +83,14 @@ try:
             #Algotirmo
      if select_Algoritmo=='Regresión lineal.':
         st.subheader('Regresión lineal.')
+        with st.sidebar.expander("Informacion Sobre el Algoritmo"):
+          st.markdown("""
+                      Que es?
+                     * La regresión lineal permite predecir el comportamiento de una variable (dependiente o predicha) a partir de otra (independiente o predictora).
+                      
+                      Para que sirve?
+                     * Tiene presunciones como la linearidad de la relación, la normalidad, la aleatoridad de la muestra y homogeneidad de las varianzas.
+            """) 
         try:
         #Combo1
          select_valx = st.sidebar.selectbox('Valores "X"',Valx)
@@ -115,6 +123,10 @@ try:
         # st.write('intercept: ', regr.intercept_)
         # st.write('r^2: ', r2)
         # st.write('Error cuadrático: ', mean_squared_error(y, y_pred))
+        #Plot
+         plt.scatter(x, y, color='green')
+         plt.plot(x, y_pred, color='blue')
+         st.pyplot(plt)
         #Funcion Lineal
          Fun="Y = "+str(regr.intercept_) +" + ("+str(regr.coef_).replace("[","").replace("]","")+")*X "
          st.write('Funcion Lineal: ')
@@ -122,23 +134,21 @@ try:
         #Prediccion
          st.write('Prediccion: ',str(regr.predict([[max_Ngrams]])).replace("[","").replace("]",""))
          #st.write(str(regr.predict([[max_Ngrams]])).replace("[","").replace("]",""))
-         #Plot
-         plt.scatter(x, y, color='green')
-         plt.plot(x, y_pred, color='blue')
-         st.pyplot(plt)
-         with st.sidebar.expander("Informacion Sobre el Algoritmo"):
-          st.markdown("""
-                      Que es?
-                     * La regresión lineal permite predecir el comportamiento de una variable (dependiente o predicha) a partir de otra (independiente o predictora).
-                      
-                      Para que sirve?
-                     * Tiene presunciones como la linearidad de la relación, la normalidad, la aleatoridad de la muestra y homogeneidad de las varianzas.
-            """)         
+         
+                 
         except Exception as e:
          print(e) 
          ##########################################################################################################################
      if select_Algoritmo=='Regresión polinomial.':
         st.subheader('Regresión polinomial.')
+        with st.sidebar.expander("Informacion Sobre el Algoritmo"):
+          st.markdown("""
+                      Que es?
+                     * Los modelos de regresión polinomial suelen ajustarse mediante el método de mínimos cuadrados. El método de mínimos cuadrados minimiza la varianza de los estimadores insesgados de los coeficientes.
+                      
+                      Para que sirve?
+                     * El objetivo de la regresión polinomial es modelar una relación no lineal entre las variables independientes y dependientes (técnicamente, entre la variable independiente y la media condicional de la variable dependiente).
+            """) 
         try:
          Vdegree = st.sidebar.number_input(
              "Grado",
@@ -191,6 +201,10 @@ try:
                    BodyPol=BodyPol+" + "+str(vx)+" X^"+str(ContPol-1)
             ContPol=ContPol+1
 
+         #Plot
+         plt.scatter(x, y, color='green')
+         plt.plot(x, y_pred, color='blue')
+         st.pyplot(plt)
          Funstr= "Y = "+str(regr.intercept_)+BodyPol
          st.write(Funstr)
          st.write('RMSE: ', rmse)
@@ -204,25 +218,23 @@ try:
          x_trans = pf.fit_transform(x_new)
          st.write('Prediccion: ',"     "+str(regr.predict(x_trans)).replace("[","").replace("]",""))
          #st.write()
-        #Plot
-         plt.scatter(x, y, color='green')
-         plt.plot(x, y_pred, color='blue')
-        #plt.show()
-         st.pyplot(plt)
+        
        ##########################################################################################################################
-         with st.sidebar.expander("Informacion Sobre el Algoritmo"):
-          st.markdown("""
-                      Que es?
-                     * Los modelos de regresión polinomial suelen ajustarse mediante el método de mínimos cuadrados. El método de mínimos cuadrados minimiza la varianza de los estimadores insesgados de los coeficientes.
-                      
-                      Para que sirve?
-                     * El objetivo de la regresión polinomial es modelar una relación no lineal entre las variables independientes y dependientes (técnicamente, entre la variable independiente y la media condicional de la variable dependiente).
-            """)        
+                
         except Exception as e:
          print(e) 
 
      if select_Algoritmo=='Clasificador Gaussiano.':
         st.subheader('Clasificador Gaussiano.')
+        with st.sidebar.expander("Informacion Sobre el Algoritmo"):
+          st.markdown("""
+                      Que es?
+                      * El Clasificador de Procesos Gaussianos es un algoritmo de aprendizaje de la máquina de clasificación.
+                      
+                      Para que sirve? 
+                      * Los procesos gausianos son una generalización de la distribución de probabilidad gausiana y pueden utilizarse como base de sofisticados algoritmos no paramétricos de aprendizaje automático para la clasificación y la regresión.
+                      * Son un tipo de modelo de núcleo, como los SVM, y a diferencia de éstos, son capaces de predecir probabilidades de pertenencia a una clase altamente calibradas, aunque la elección y configuración del núcleo utilizado en el núcleo del método puede ser un reto.
+                      """) 
         try:
          select_valxlist = st.sidebar.multiselect('Valores de Columnas de interes',Valx)
          select_valylist = st.sidebar.multiselect('Valores de Columna de respuesta',Valy)
@@ -253,17 +265,17 @@ try:
         ##########################################################################################################################      
         except Exception as e:
                   print(e) 
+         
+     if select_Algoritmo=='Clasificador de árboles de decisión.':
+        st.subheader('Clasificador de árboles de decisión.')
         with st.sidebar.expander("Informacion Sobre el Algoritmo"):
           st.markdown("""
                       Que es?
-                      * El Clasificador de Procesos Gaussianos es un algoritmo de aprendizaje de la máquina de clasificación.
+                     * Un árbol de decisión o un árbol de clasificación es un árbol en el que cada nodo interno (no hoja) está etiquetado con una función de entrada. Los arcos procedentes de un nodo etiquetado con una característica están etiquetados con cada uno de los posibles valores de la característica.
                       
-                      Para que sirve? 
-                      * Los procesos gausianos son una generalización de la distribución de probabilidad gausiana y pueden utilizarse como base de sofisticados algoritmos no paramétricos de aprendizaje automático para la clasificación y la regresión.
-                      * Son un tipo de modelo de núcleo, como los SVM, y a diferencia de éstos, son capaces de predecir probabilidades de pertenencia a una clase altamente calibradas, aunque la elección y configuración del núcleo utilizado en el núcleo del método puede ser un reto.
-                      """)  
-     if select_Algoritmo=='Clasificador de árboles de decisión.':
-        st.subheader('Clasificador de árboles de decisión.')
+                      Para que sirve?
+                     * Un árbol puede ser "aprendido" mediante el fraccionamiento del conjunto inicial en subconjuntos basados en una prueba de valor de atributo. Este proceso se repite en cada subconjunto derivado de una manera recursiva llamada particionamiento recursivo. La recursividad termina cuando el subconjunto en un nodo tiene todo el mismo valor de la variable objetivo, o cuando la partición ya no agrega valor a las predicciones.
+            """) 
         select_valxlist = st.sidebar.multiselect('Valores de Columnas de interes',Valx)
         select_valylist = st.sidebar.multiselect('Valores de Columna de respuesta',Valy)
 
@@ -282,9 +294,11 @@ try:
          arraylist = List_Val(vals)
          valInit= list(map(float,arraylist))
         
-         clf = DecisionTreeClassifier()
+         clf = DecisionTreeClassifier().fit(x,y)
+         plot_tree(clf,filled=True)
+         st.pyplot(plt)
         # Adaptación de datos
-         clf.fit(x,y)
+         
          st.write("Prediccion: ")
          st.write(clf.predict([valInit]))
          #st.write("==Predict result by predict_proba==")
@@ -293,10 +307,10 @@ try:
          # print(clf.predict_log_proba([[-0.8, -1]]))
          #vtree= tree.export_graphviz(clf,out_file=None)
          #st.#.graphviz_chart(vtree)
-         plot_tree(clf,filled=True)
+         
          #plt.savefig("arbolDecision.png")
          #st.image("./arbolDecision.png")
-         st.pyplot(plt)
+         #st.pyplot(plt)
 
          
          # create dataset for lightgbm
@@ -344,16 +358,17 @@ try:
 
 
         ##########################################################################################################################
-         with st.sidebar.expander("Informacion Sobre el Algoritmo"):
-          st.markdown("""
-                      Que es?
-                     * La regresión lineal permite predecir el comportamiento de una variable (dependiente o predicha) a partir de otra (independiente o predictora).
-                      
-                      Para que sirve?
-                     * Tiene presunciones como la linearidad de la relación, la normalidad, la aleatoridad de la muestra y homogeneidad de las varianzas.
-            """)     
+    
      if select_Algoritmo=='Redes neuronales.':
         st.subheader('Redes neuronales.')
+        with st.sidebar.expander("Informacion Sobre el Algoritmo"):
+          st.markdown("""
+                      Que es?
+                      * Una red neuronal es un método de la inteligencia artificial que enseña a las computadoras a procesar datos de una manera que está inspirada en la forma en que lo hace el cerebro humano.
+                      
+                      Para que sirve? 
+                      * las redes neuronales artificiales intentan resolver problemas complicados, como la realización de resúmenes de documentos o el reconocimiento de rostros, con mayor precisión.
+                      """)       
         try:
          select_valxlist = st.sidebar.multiselect('Valores de Columnas de interes',Valx)
          select_valylist = st.sidebar.multiselect('Valores de Columna de respuesta',Valy)
@@ -383,15 +398,7 @@ try:
         ##########################################################################################################################
         except Exception as e:
             print(e) 
-        with st.sidebar.expander("Informacion Sobre el Algoritmo"):
-          st.markdown("""
-                      Que es?
-                      * El Clasificador de Procesos Gaussianos es un algoritmo de aprendizaje de la máquina de clasificación.
-                      
-                      Para que sirve? 
-                      * Los procesos gausianos son una generalización de la distribución de probabilidad gausiana y pueden utilizarse como base de sofisticados algoritmos no paramétricos de aprendizaje automático para la clasificación y la regresión.
-                      * Son un tipo de modelo de núcleo, como los SVM, y a diferencia de éstos, son capaces de predecir probabilidades de pertenencia a una clase altamente calibradas, aunque la elección y configuración del núcleo utilizado en el núcleo del método puede ser un reto.
-                      """)             
+              
     # -- checñ box 
 except Exception as e:
        print(e) 
