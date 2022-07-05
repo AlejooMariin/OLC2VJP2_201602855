@@ -5,14 +5,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 from sklearn.neural_network import MLPClassifier
-from sklearn.tree import DecisionTreeClassifier ,plot_tree
+from sklearn.tree import DecisionTreeClassifier ,plot_tree,export_graphviz
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import mean_squared_error, r2_score
 import re
-import graphviz as gra
-import sklearn as arbol
+
+
 
 import requests, os
 mpl.use("agg")
@@ -299,8 +299,8 @@ try:
          clf = DecisionTreeClassifier().fit(x,y)
          # plot_tree(clf,filled=True)
          # st.pyplot(plt)
-         dot= arbol.export_graphviz(clf,out_file=None)
-         st.graphviz_chart(dot)
+         Treedot= export_graphviz(clf,out_file=None,filled=True,rounded=True,special_characters=True)
+         st.graphviz_chart(Treedot)
         # Adaptación de datos
          
          st.write("Prediccion: ")
