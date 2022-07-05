@@ -296,7 +296,7 @@ try:
         
          clf = DecisionTreeClassifier().fit(x,y)
          plot_tree(clf,filled=True)
-         st.pyplot(plt)
+         #st.pyplot(plt)
         # Adaptación de datos
          
          st.write("Prediccion: ")
